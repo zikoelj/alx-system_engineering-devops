@@ -1,0 +1,2 @@
+#!/bin/bash
+(ls -1af | tr '\n' '\0' | sed -z 's/\(.*\)\/*/\1\//g' | LC_COLLATE=C sort -df | tr '\0' ',') || echo
