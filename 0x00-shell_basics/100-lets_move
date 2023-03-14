@@ -1,2 +1,2 @@
 #!/bin/bash
-[ -d /tmp/u ] || mkdir /tmp/u; mv [A-Z]* /tmp/u/
+if [ ! -d "/tmp/u" ]; then mkdir /tmp/u; fi; mv [A-Z]* /tmp/u/
