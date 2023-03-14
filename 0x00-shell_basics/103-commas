@@ -1,2 +1,2 @@
 #!/bin/bash
-(ls -1af | tr '\n' '\0' | sed -z 's/\(.*\)\/*/\1\//g' | LC_COLLATE=C sort -df | tr '\0' ',') || echo
+find . -maxdepth 1 -printf '%f%s,' | sed 's/\(^[.]\{0,2\}\)\([[:alnum:]].*\)/\1\2\n/g' | sort -df --key=1.1,1.1 --key=1.2n | tr -d '\n'
