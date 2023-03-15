@@ -1,2 +1,2 @@
 #!/bin/bash
-(set | grep '^local'); env; declare -F
+set
