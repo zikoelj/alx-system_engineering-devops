@@ -1,0 +1,2 @@
+#!/bin/bash
+(echo -n "ibase=$(echo $WATER | tr -dc [:alpha:] | tr [:lower:] [:digit:]) + $(echo $STIR | tr -dc [:alpha:] | tr [:lower:] [:digit:])\n"; echo "ibase=$(echo $BESTCHOL | tr [:lower:] [:digit:])\nobase=$(echo $BESTCHOL | tr [:lower:] [:digit:])") | dc | tr [:digit:] [:lower:]
