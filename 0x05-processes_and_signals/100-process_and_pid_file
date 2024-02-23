@@ -1,25 +1,24 @@
 #!/usr/bin/env bash
-#unkillable bad program
+# Does the following:
+#   Create a file /var/run/myscript.pid containing the script PID.
+#   Displays "To infinity and beyond" indefinitely
+#   Displays "I hate the kill command" upon receiving a SIGTERM
+#   Displays "Y U no love me?!" upon receiving a SIGINT
+#   Deletes the file /var/run/myscript.pid and terminates upon
+#+  receiving a SIGQUIT or SIGTERM.
+
+terminator() {
+  rm /var/run/myscript.pid
+  exit
+}
+
 echo "$$" > /var/run/myscript.pid
-sigterm=false
-sigint=false
-sigquit=false
-trap 'sigterm=true' SIGTERM
-trap 'sigint=true' SIGINT
-trap 'sigquit=true' SIGQUIT
-i=0
-while [ $i -le 1 ]
+
+while true
 do
-    echo "To infinity and beyond"
-    sleep 2
-    if [ "$sigterm" = true ]; then
-        echo "I hate the kill command"
-        rm -r /var/run/myscript.pid
-        exit 0
-    elif [ "$sigint" = true ]; then
-        echo "Y U no love me?!"
-    elif [ "$sigquit" = true ]; then
-        rm -r /var/run/myscript.pid
-        exit 0
-    fi        
+  echo "To infinity and beyond"
+  sleep 2
+  trap 'echo "Y U no love me?!"' SIGINT
+  trap 'echo "I hate the kill command" && terminator' SIGTERM
+  trap 'terminator' SIGQUIT
 done
