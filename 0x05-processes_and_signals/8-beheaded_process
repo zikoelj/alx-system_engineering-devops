@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#kill processor even if it can trap a SIGTERM
+pid=$(pgrep -f 7-highlander)
+kill -9 "$pid"
