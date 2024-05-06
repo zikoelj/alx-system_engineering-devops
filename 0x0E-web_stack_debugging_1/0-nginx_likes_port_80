@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # Uses symbolic link to change default behavior: -s make symbolic links instead of hard links, -f remove existing destination files 
 sed -i "s/listen 8080 default_server;/listen 80 default_server;/" "/etc/nginx/sites-available/default"
-sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo service nginx reload
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
