@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
-# Double the number of webservers
+# Update package list
 sudo apt-get update
+
+
 sudo apt-get -y install nginx
-sudo sed -i "s#server_name _;#server_name _;\n\tadd_header X-Served-By $(hostname);#" /etc/nginx/sites-available/default
+
+#configuration file
+sudo sed -i "s#server_name ;#server_name ;\n\tlisten 80;\n\tadd_header X-Served-By \$hostname;#" /etc/nginx/sites-available/default
+
+#in the sites-enabled directory
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+
 sudo service nginx restart
